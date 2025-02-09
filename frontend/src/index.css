@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Added custom modern design styles
+body {
+  @apply font-sans bg-gradient-to-r from-gray-100 to-gray-200;
+}
