@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" version="1.1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <!-- Chat bubble background -->
+    <path 
+        d="M8 16C8 11.5817 11.5817 8 16 8H48C52.4183 8 56 11.5817 56 16V40C56 44.4183 52.4183 48 48 48H36L24 56V48H16C11.5817 48 8 44.4183 8 40V16Z" 
+        fill="#4F46E5"
+    />
+    <!-- Chat lines -->
+    <line x1="24" y1="24" x2="40" y2="24" stroke="white" stroke-width="4" stroke-linecap="round"/>
+    <line x1="24" y1="32" x2="36" y2="32" stroke="white" stroke-width="4" stroke-linecap="round"/>
+    <!-- Status indicator -->
+    <circle cx="44" cy="20" r="4" fill="#10B981"/>
+</svg>
