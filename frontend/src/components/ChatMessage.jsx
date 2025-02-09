@@ -4,6 +4,8 @@ import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { parseMessage } from '../utils/messageUtils';
 
 export const ChatMessage = ({ message }) => {
+  const isUser = message.role === 'user';
+  
   if (message.role === 'assistant' && message.content.includes('<think>')) {
     const { reasoning, answer } = parseMessage(message.content);
     return (
@@ -43,11 +45,11 @@ export const ChatMessage = ({ message }) => {
   }
 
   return (
-    <div className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-      <div className={`max-w-[70%] rounded-lg p-4 shadow-sm ${
-        message.role === 'user'
-          ? 'bg-blue-500 text-white'
-          : 'bg-gray-200 text-gray-800'
+    <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
+      <div className={`rounded-lg p-4 shadow-sm max-w-[80%] ${
+        isUser 
+          ? 'bg-blue-100 border border-blue-200 text-gray-800' 
+          : 'bg-gray-50 border border-gray-200 text-gray-800'
       }`}>
         {message.content}
       </div>

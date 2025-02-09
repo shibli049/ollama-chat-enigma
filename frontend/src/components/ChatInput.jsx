@@ -2,22 +2,21 @@ import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
 export const ChatInput = ({ input, setInput, isLoading, onSubmit }) => {
   return (
-    <form onSubmit={onSubmit} className="p-6 bg-gray-100 border-t">
-      <div className="flex space-x-3">
-        <input
-          type="text"
+    <form onSubmit={onSubmit} className="p-4 border-t">
+      <div className="flex items-end max-w-[60%] mx-auto">
+        <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
-          placeholder="Type your message..."
+          placeholder="Type your message here..."
+          className="flex-1 h-36 p-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 bg-blue-50 border-blue-200"
           disabled={isLoading}
         />
         <button
           type="submit"
           disabled={isLoading}
-          className="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 disabled:bg-blue-300 transition-transform duration-200 hover:scale-105 flex items-center justify-center"
+          className="ml-2 p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
         >
-          <PaperAirplaneIcon className="h-6 w-6" />
+          <PaperAirplaneIcon className="h-5 w-5" />
         </button>
       </div>
     </form>
