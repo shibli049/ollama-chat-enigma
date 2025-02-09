@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useRef, useEffect } from 'react';
-import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
+import { PaperAirplaneIcon, PencilSquareIcon } from '@heroicons/react/24/solid';
 import ReactMarkdown from 'react-markdown';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -125,13 +125,13 @@ function App() {
         {/* Left Panel */}
         <div className="w-64 bg-gray-800 text-white flex flex-col">
           {/* New Chat Button moved to top */}
-          <div className="p-4 border-b border-gray-700">
+          <div className="p-4 border-b border-gray-700" >
             <button
               onClick={handleNewChat}
-              className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition-transform duration-200 hover:scale-105 flex items-center justify-center gap-2"
+              className="w-10 h-10 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-transform duration-200 hover:scale-105 flex items-center justify-center"
+              title="New Chat"
             >
-              <PaperAirplaneIcon className="h-5 w-5" />
-              New Chat
+              <PencilSquareIcon className="h-5 w-5"/>
             </button>
           </div>
           {/* Chat History Section - To be implemented */}
@@ -145,7 +145,7 @@ function App() {
           <header className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white p-6 shadow-md">
             <div className="flex flex-col items-center">
               <div className="relative">
-                <h1 className="text-3xl font-bold">Arcane Enigma</h1>
+                <h1 className="text-3xl font-bold">Arcane Chat Enigma</h1>
                 <p className="text-xs absolute -bottom-4 right-1">by <a href="https://github.com/shibli049" className="text-yellow-300 hover:underline">shibli049</a></p>
               </div>
             </div>
