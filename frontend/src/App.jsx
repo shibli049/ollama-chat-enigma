@@ -36,7 +36,10 @@ function App() {
   }, []);
 
   const addMessage = (message) => {
-    const updatedMessages = [...messages, message];
+    if (!message.timestamp) {
+      message.timestamp = Date.now();
+    }
+    const updatedMessages = [...messages, message].sort((a, b) => a.timestamp - b.timestamp);
     setMessages(updatedMessages);
     localStorage.setItem('chatMessages', JSON.stringify(updatedMessages));
   };
@@ -45,39 +48,43 @@ function App() {
     e.preventDefault();
     if (!input.trim()) return;
 
-    const userMessage = { role: 'user', content: input };
+    const userMessage = { role: 'user', content: input, timestamp: Date.now() };
     addMessage(userMessage);
     setInput('');
     setIsLoading(true);
 
+    // Add a placeholder for the assistant's response
+    let assistantMessage = { role: 'assistant', content: '', timestamp: Date.now() };
+    setMessages(prev => {
+      const updated = [...prev, assistantMessage].sort((a, b) => a.timestamp - b.timestamp);
+      localStorage.setItem('chatMessages', JSON.stringify(updated));
+      return updated;
+    });
+
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          prompt: input,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: input }),
       });
 
       const reader = response.body.getReader();
-      let assistantMessage = { role: 'assistant', content: '' };
-      
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        
+
         const chunk = new TextDecoder().decode(value);
         const lines = chunk.split('\n').filter(Boolean);
-        
+
         for (const line of lines) {
           const data = JSON.parse(line);
           assistantMessage.content += data.response;
-          setMessages(prev => [
-            ...prev.slice(0, -1),
-            assistantMessage
-          ]);
+          setMessages(prev => {
+            // Update the last message (assumed be the assistant placeholder)
+            const updated = prev.map((msg, i) => i === prev.length - 1 ? assistantMessage : msg);
+            localStorage.setItem('chatMessages', JSON.stringify(updated));
+            return updated;
+          });
         }
       }
     } catch (error) {
@@ -90,9 +97,17 @@ function App() {
   return (
     <div className="h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500">
       <div className="flex flex-col w-full h-full bg-white shadow-xl">
-        <header className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white p-6 shadow-md">
-          <h1 className="text-3xl font-bold text-center">Deepseek Chat</h1>
-        </header>
+          <header className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white p-6 shadow-md">
+              <div className="flex flex-col items-center">
+                  <div className="relative">
+                      <h1 className="text-3xl font-bold">Arcane Enigma</h1>
+                      <p className="text-xs absolute -bottom-4 right-1">by shibli049</p>
+                  </div>
+              </div>
+          </header>
+
+
+
         <div className="flex flex-col flex-1 overflow-y-auto p-6 space-y-4">
           {messages.map((message, index) => {
             if (message.role === 'assistant' && message.content.includes('<think>')) {
