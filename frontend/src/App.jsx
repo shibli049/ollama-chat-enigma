@@ -6,11 +6,14 @@ import { Sidebar } from './components/Sidebar';
 import { ChatMessage } from './components/ChatMessage';
 import { ChatInput } from './components/ChatInput';
 import { useMessages } from './hooks/useMessages';
+import { useDarkMode } from './hooks/useDarkMode';
+import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 
 function App() {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
   const { messages, setMessages, isLoading, setIsLoading, addMessage, clearMessages } = useMessages();
+  const [isDark, setIsDark] = useDarkMode();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -91,16 +94,26 @@ function App() {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500">
+    <div className="h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 dark:from-gray-800 dark:via-gray-900 dark:to-black">
       <div className="flex h-full">
         <Sidebar onNewChat={handleNewChat} />
-        <div className="flex-1 flex flex-col bg-white shadow-xl">
-          <header className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white p-6 shadow-md">
-            <div className="flex flex-col items-center">
+        <div className="flex-1 flex flex-col bg-white dark:bg-gray-900 shadow-xl">
+          <header className="bg-gradient-to-r from-indigo-600 to-blue-500 dark:from-gray-800 dark:to-gray-700 text-white p-6 shadow-md">
+            <div className="flex justify-between items-center">
               <div className="relative">
                 <h1 className="text-3xl font-bold">Arcane Chat Enigma</h1>
                 <p className="text-xs absolute -bottom-4 right-1">by <a href="https://github.com/shibli049" className="text-yellow-300 hover:underline">shibli049</a></p>
               </div>
+              <button
+                onClick={() => setIsDark(!isDark)}
+                className="p-2 rounded-lg hover:bg-white/10"
+              >
+                {isDark ? (
+                  <SunIcon className="h-6 w-6" />
+                ) : (
+                  <MoonIcon className="h-6 w-6" />
+                )}
+              </button>
             </div>
           </header>
           <div className="flex flex-col flex-1 overflow-y-auto p-6 space-y-4">
@@ -126,8 +139,8 @@ function App() {
             isLoading={isLoading}
             onSubmit={handleSubmit}
           />
-          <div className="p-4 bg-gray-100 border-t">
-            <footer className="text-gray-600 text-center">
+          <div className="p-4 bg-gray-100 dark:bg-gray-800 border-t dark:border-gray-700">
+            <footer className="text-gray-600 dark:text-gray-400 text-center">
               Powered by
               <a href="https://ollama.com/library/deepseek-r1" className="text-blue-500 hover:underline"> Deepseek </a>
               and

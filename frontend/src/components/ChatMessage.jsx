@@ -10,35 +10,39 @@ export const ChatMessage = ({ message }) => {
     const { reasoning, answer } = parseMessage(message.content);
     return (
       <div className="flex justify-center">
-        <div className="max-w-[60%] w-full rounded-lg p-4 shadow-sm bg-gray-200 text-gray-800">
-          {reasoning && (
-            <details className="mb-2 border rounded p-2 bg-gray-100">
-              <summary className="cursor-pointer font-bold">Show reasoning</summary>
-              <div className="mt-2 text-sm text-gray-700">{reasoning}</div>
-            </details>
-          )}
-          <ReactMarkdown 
-            className="border-t pt-2 prose prose-sm text-gray-900"
-            components={{
-              code({node, inline, className, children, ...props}) {
-                const match = /language-(\w+)/.exec(className || '');
-                return !inline && match ? (
-                  <SyntaxHighlighter
-                    style={vscDarkPlus}
-                    language={match[1]}
-                    PreTag="div"
-                    {...props}
-                  >
-                    {String(children).replace(/\n$/, '')}
-                  </SyntaxHighlighter>
-                ) : (
-                  <code className={className} {...props}>{children}</code>
-                );
-              }
-            }}
-          >
-            {answer}
-          </ReactMarkdown>
+        <div className="w-full max-w-[60%]">
+          <div className="flex justify-start w-full">
+            <div className="w-full rounded-lg p-4 shadow-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">
+              {reasoning && (
+                <details className="mb-2 border rounded p-2 bg-gray-100 dark:bg-gray-700 dark:border-gray-600">
+                  <summary className="cursor-pointer font-bold">Show reasoning</summary>
+                  <div className="mt-2 text-sm text-gray-700 dark:text-gray-300">{reasoning}</div>
+                </details>
+              )}
+              <ReactMarkdown 
+                className="border-t dark:border-gray-700 pt-2 prose prose-sm dark:prose-invert"
+                components={{
+                  code({node, inline, className, children, ...props}) {
+                    const match = /language-(\w+)/.exec(className || '');
+                    return !inline && match ? (
+                      <SyntaxHighlighter
+                        style={vscDarkPlus}
+                        language={match[1]}
+                        PreTag="div"
+                        {...props}
+                      >
+                        {String(children).replace(/\n$/, '')}
+                      </SyntaxHighlighter>
+                    ) : (
+                      <code className={className} {...props}>{children}</code>
+                    );
+                  }
+                }}
+              >
+                {answer}
+              </ReactMarkdown>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -47,11 +51,11 @@ export const ChatMessage = ({ message }) => {
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-[60%]">
-        <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
-          <div className={`rounded-lg p-4 shadow-sm ${
+        <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} w-full`}>
+          <div className={`${!isUser && 'w-full'} rounded-lg p-4 shadow-sm ${
             isUser 
-              ? 'max-w-[75%] bg-blue-100 border border-blue-200 text-gray-800' 
-              : 'w-full bg-gray-50 border border-gray-200 text-gray-800'
+              ? 'max-w-[75%] bg-blue-100 dark:bg-blue-900 border border-blue-200 dark:border-blue-800 text-gray-800 dark:text-gray-200' 
+              : 'bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200'
           }`}>
             {message.content}
           </div>
