@@ -10,7 +10,7 @@ export const ChatMessage = ({ message }) => {
     const { reasoning, answer } = parseMessage(message.content);
     return (
       <div className="flex justify-start">
-        <div className="max-w-[70%] rounded-lg p-4 shadow-sm bg-gray-200 text-gray-800">
+        <div className="max-w-[60%] w-full rounded-lg p-4 shadow-sm bg-gray-200 text-gray-800">
           {reasoning && (
             <details className="mb-2 border rounded p-2 bg-gray-100">
               <summary className="cursor-pointer font-bold">Show reasoning</summary>
@@ -46,10 +46,10 @@ export const ChatMessage = ({ message }) => {
 
   return (
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
-      <div className={`rounded-lg p-4 shadow-sm max-w-[80%] ${
+      <div className={`rounded-lg p-4 shadow-sm ${
         isUser 
-          ? 'bg-blue-100 border border-blue-200 text-gray-800' 
-          : 'bg-gray-50 border border-gray-200 text-gray-800'
+          ? 'max-w-[45%] bg-blue-100 border border-blue-200 text-gray-800' 
+          : 'max-w-[60%] w-full bg-gray-50 border border-gray-200 text-gray-800'
       }`}>
         {message.content}
       </div>
