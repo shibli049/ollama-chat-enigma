@@ -16,12 +16,24 @@ function App() {
     scrollToBottom();
   }, [messages]);
 
+  useEffect(() => {
+    // Load persisted messages on mount
+    const storedMessages = localStorage.getItem('chatMessages');
+    if (storedMessages) setMessages(JSON.parse(storedMessages));
+  }, []);
+
+  const addMessage = (message) => {
+    const updatedMessages = [...messages, message];
+    setMessages(updatedMessages);
+    localStorage.setItem('chatMessages', JSON.stringify(updatedMessages));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
 
     const userMessage = { role: 'user', content: input };
-    setMessages(prev => [...prev, userMessage]);
+    addMessage(userMessage);
     setInput('');
     setIsLoading(true);
 
