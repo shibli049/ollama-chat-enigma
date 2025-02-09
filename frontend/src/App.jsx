@@ -2,6 +2,9 @@ import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import ReactMarkdown from 'react-markdown';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import './custom-react-confirm-alert.css';
 
 // Add helper to parse assistant message content
 const parseMessage = (content) => {
@@ -94,6 +97,26 @@ function App() {
     }
   };
 
+  const handleNewChat = () => {
+    confirmAlert({
+      title: 'Start a New Chat?',
+      message: "Are you sure you want to clear the chat? All messages will be lost.",
+      overlayClassName: 'no-blur', // added to remove blur
+      buttons: [
+        {
+          label: 'Yes, start new chat!',
+          onClick: () => {
+            setMessages([]);
+            localStorage.removeItem('chatMessages');
+          }
+        },
+        {
+          label: 'No'
+        }
+      ]
+    });
+  };
+
   return (
     <div className="h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500">
       <div className="flex flex-col w-full h-full bg-white shadow-xl">
@@ -167,12 +190,20 @@ function App() {
             </button>
           </div>
         </form>
-        <footer className="bg-gray-100 text-gray-600 text-center p-4 border-t">
-          Powered by
-          <a href="https://ollama.com/library/deepseek-r1" className="text-blue-500 hover:underline"> Deepseek </a>
-           and 
-          <a href="https://ollama.com/" className="text-blue-500 hover:underline"> Ollama</a>
-        </footer>
+        <div className="p-6 bg-gray-100 border-t flex flex-col items-center space-y-4">
+          <button
+            onClick={handleNewChat}
+            className="bg-red-500 text-white p-3 rounded-lg hover:bg-red-600 transition-transform duration-200 hover:scale-105"
+          >
+            New Chat
+          </button>
+          <footer className="text-gray-600 text-center">
+            Powered by
+            <a href="https://ollama.com/library/deepseek-r1" className="text-blue-500 hover:underline"> Deepseek </a>
+            and
+            <a href="https://ollama.com/" className="text-blue-500 hover:underline"> Ollama</a>
+          </footer>
+        </div>
       </div>
     </div>
   );

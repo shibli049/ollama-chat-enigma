@@ -1,0 +1,34 @@
+.react-confirm-alert-overlay {
+  background: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.no-blur {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
+}
+
+.react-confirm-alert-body {
+  background: white;
+  border-radius: 8px;
+  padding: 30px;
+}
+
+.react-confirm-alert-button-group {
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.react-confirm-alert-button-group button {
+  background: #3b82f6;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
+.react-confirm-alert-button-group button:hover {
+  background: #2563eb;
+}
