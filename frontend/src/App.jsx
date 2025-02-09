@@ -5,6 +5,8 @@ import ReactMarkdown from 'react-markdown';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import './custom-react-confirm-alert.css';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 // Add helper to parse assistant message content
 const parseMessage = (content) => {
@@ -143,7 +145,28 @@ function App() {
                         </div>
                       </details>
                     )}
-                    <ReactMarkdown className="border-t pt-2 prose prose-sm text-gray-900">
+                    <ReactMarkdown 
+                      className="border-t pt-2 prose prose-sm text-gray-900"
+                      components={{
+                        code({node, inline, className, children, ...props}) {
+                          const match = /language-(\w+)/.exec(className || '');
+                          return !inline && match ? (
+                            <SyntaxHighlighter
+                              style={vscDarkPlus}
+                              language={match[1]}
+                              PreTag="div"
+                              {...props}
+                            >
+                              {String(children).replace(/\n$/, '')}
+                            </SyntaxHighlighter>
+                          ) : (
+                            <code className={className} {...props}>
+                              {children}
+                            </code>
+                          )
+                        }
+                      }}
+                    >
                       {answer}
                     </ReactMarkdown>
                   </div>
