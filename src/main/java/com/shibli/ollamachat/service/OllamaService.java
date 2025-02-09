@@ -3,7 +3,6 @@ package com.shibli.ollamachat.service;
 import com.shibli.ollamachat.model.ChatRequest;
 import com.shibli.ollamachat.model.ChatResponse;
 import com.shibli.ollamachat.model.Message;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -31,8 +30,23 @@ public class OllamaService {
             messages = request.getMessages();
         }
 
-        // Add current prompt as a new message
-        messages.add(new Message("user", request.getPrompt()));
+        // Format conversation history
+        StringBuilder conversation = new StringBuilder();
+        conversation.append("System: You are a helpful AI assistant.\n\n");
+        
+        for (Message message : messages) {
+            conversation.append(message.getRole())
+                    .append(": ")
+                    .append(message.getContent())
+                    .append("\n\n");
+        }
+        
+        // Add current prompt
+        conversation.append("user: ").append(request.getPrompt()).append("\n\n");
+        
+        // Update the request with formatted conversation
+        request.setPrompt(conversation.toString());
+        request.setMessages(new ArrayList<>()); // Clear individual messages
 
         return webClient.post()
                 .uri("/api/generate")
