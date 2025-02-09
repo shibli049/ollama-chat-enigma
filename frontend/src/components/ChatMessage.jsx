@@ -9,7 +9,7 @@ export const ChatMessage = ({ message }) => {
   if (message.role === 'assistant' && message.content.includes('<think>')) {
     const { reasoning, answer } = parseMessage(message.content);
     return (
-      <div className="flex justify-start">
+      <div className="flex justify-center">
         <div className="max-w-[60%] w-full rounded-lg p-4 shadow-sm bg-gray-200 text-gray-800">
           {reasoning && (
             <details className="mb-2 border rounded p-2 bg-gray-100">
@@ -45,13 +45,17 @@ export const ChatMessage = ({ message }) => {
   }
 
   return (
-    <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
-      <div className={`rounded-lg p-4 shadow-sm ${
-        isUser 
-          ? 'max-w-[45%] bg-blue-100 border border-blue-200 text-gray-800' 
-          : 'max-w-[60%] w-full bg-gray-50 border border-gray-200 text-gray-800'
-      }`}>
-        {message.content}
+    <div className="flex justify-center">
+      <div className="w-full max-w-[60%]">
+        <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
+          <div className={`rounded-lg p-4 shadow-sm ${
+            isUser 
+              ? 'max-w-[75%] bg-blue-100 border border-blue-200 text-gray-800' 
+              : 'w-full bg-gray-50 border border-gray-200 text-gray-800'
+          }`}>
+            {message.content}
+          </div>
+        </div>
       </div>
     </div>
   );
