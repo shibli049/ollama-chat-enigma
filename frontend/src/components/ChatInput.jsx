@@ -2,7 +2,7 @@ import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
 export const ChatInput = ({ input, setInput, isLoading, onSubmit }) => {
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey && !e.ctrlKey) {
+    if (e.key === 'Enter' && !e.shiftKey && !input.includes('\n')) {      
       e.preventDefault();
       onSubmit(e);
     }
