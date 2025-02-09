@@ -96,24 +96,18 @@ function App() {
   return (
     <div className="h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 dark:from-gray-800 dark:via-gray-900 dark:to-black">
       <div className="flex h-full">
-        <Sidebar onNewChat={handleNewChat} />
+        <Sidebar 
+          onNewChat={handleNewChat}
+          isDark={isDark}
+          setIsDark={setIsDark}
+        />
         <div className="flex-1 flex flex-col bg-white dark:bg-gray-900 shadow-xl">
           <header className="bg-gradient-to-r from-indigo-600 to-blue-500 dark:from-gray-800 dark:to-gray-700 text-white p-6 shadow-md">
-            <div className="flex justify-between items-center">
-              <div className="relative">
+            <div className="flex justify-center items-center">
+              <div className="text-center">
                 <h1 className="text-3xl font-bold">Arcane Chat Enigma</h1>
-                <p className="text-xs absolute -bottom-4 right-1">by <a href="https://github.com/shibli049" className="text-yellow-300 hover:underline">shibli049</a></p>
+                <p className="text-xs mt-1">by <a href="https://github.com/shibli049" className="text-yellow-300 hover:underline">shibli049</a></p>
               </div>
-              <button
-                onClick={() => setIsDark(!isDark)}
-                className="p-2 rounded-lg hover:bg-white/10"
-              >
-                {isDark ? (
-                  <SunIcon className="h-6 w-6" />
-                ) : (
-                  <MoonIcon className="h-6 w-6" />
-                )}
-              </button>
             </div>
           </header>
           <div className="flex flex-col flex-1 overflow-y-auto p-6 space-y-4">
