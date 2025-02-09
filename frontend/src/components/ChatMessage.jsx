@@ -54,10 +54,30 @@ export const ChatMessage = ({ message }) => {
         <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} w-full`}>
           <div className={`${!isUser && 'w-full'} rounded-lg p-4 shadow-sm ${
             isUser 
-              ? 'max-w-[75%] bg-blue-100 dark:bg-blue-900 border border-blue-200 dark:border-blue-800 text-gray-800 dark:text-gray-200' 
+              ? 'max-w-[75%] bg-blue-100 dark:bg-blue-900 border border-blue-200 dark:border-blue-800 text-gray-800 dark:text-gray-200 prose prose-sm dark:prose-invert' 
               : 'bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200'
           }`}>
-            {message.content}
+            <ReactMarkdown
+              components={{
+                code({node, inline, className, children, ...props}) {
+                  const match = /language-(\w+)/.exec(className || '');
+                  return !inline && match ? (
+                    <SyntaxHighlighter
+                      style={vscDarkPlus}
+                      language={match[1]}
+                      PreTag="div"
+                      {...props}
+                    >
+                      {String(children).replace(/\n$/, '')}
+                    </SyntaxHighlighter>
+                  ) : (
+                    <code className={className} {...props}>{children}</code>
+                  );
+                }
+              }}
+            >
+              {message.content}
+            </ReactMarkdown>
           </div>
         </div>
       </div>
