@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
+import ReactMarkdown from 'react-markdown';
 
 // Add helper to parse assistant message content
 const parseMessage = (content) => {
@@ -107,9 +108,9 @@ function App() {
                         </div>
                       </details>
                     )}
-                    <div className="border-t pt-2 prose prose-sm text-gray-900">
+                    <ReactMarkdown className="border-t pt-2 prose prose-sm text-gray-900">
                       {answer}
-                    </div>
+                    </ReactMarkdown>
                   </div>
                 </div>
               );
