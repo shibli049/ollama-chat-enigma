@@ -108,9 +108,13 @@ function App() {
               <ChatMessage key={index} message={message} />
             ))}
             {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-gray-200 text-gray-800 rounded-lg p-4 shadow-sm">
-                  Thinking...
+              <div className="flex justify-center">
+                <div className="w-full max-w-[60%]">
+                  <div className="flex justify-start">
+                    <div className="bg-gray-200 text-gray-800 rounded-lg p-4 shadow-sm">
+                      Thinking...
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
