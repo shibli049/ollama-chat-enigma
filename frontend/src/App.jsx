@@ -97,17 +97,14 @@ function App() {
   return (
     <div className="h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500">
       <div className="flex flex-col w-full h-full bg-white shadow-xl">
-          <header className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white p-6 shadow-md">
-              <div className="flex flex-col items-center">
-                  <div className="relative">
-                      <h1 className="text-3xl font-bold">Arcane Enigma</h1>
-                      <p className="text-xs absolute -bottom-4 right-1">by shibli049</p>
-                  </div>
-              </div>
-          </header>
-
-
-
+        <header className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white p-6 shadow-md">
+          <div className="flex flex-col items-center">
+            <div className="relative">
+              <h1 className="text-3xl font-bold">Arcane Enigma</h1>
+              <p className="text-xs absolute -bottom-4 right-1">by <a href="https://github.com/shibli049" className="text-yellow-300 hover:underline">shibli049</a></p>
+            </div>
+          </div>
+        </header>
         <div className="flex flex-col flex-1 overflow-y-auto p-6 space-y-4">
           {messages.map((message, index) => {
             if (message.role === 'assistant' && message.content.includes('<think>')) {
@@ -170,6 +167,12 @@ function App() {
             </button>
           </div>
         </form>
+        <footer className="bg-gray-100 text-gray-600 text-center p-4 border-t">
+          Powered by
+          <a href="https://ollama.com/library/deepseek-r1" className="text-blue-500 hover:underline"> Deepseek </a>
+           and 
+          <a href="https://ollama.com/" className="text-blue-500 hover:underline"> Ollama</a>
+        </footer>
       </div>
     </div>
   );
