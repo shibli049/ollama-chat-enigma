@@ -2,6 +2,18 @@ import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
+// Add helper to parse assistant message content
+const parseMessage = (content) => {
+  const thinkRegex = /<think>(.*?)<\/think>/s;
+  const match = content.match(thinkRegex);
+  if (match) {
+    const reasoning = match[1].trim();
+    const answer = content.replace(thinkRegex, "").trim();
+    return { reasoning, answer };
+  }
+  return { reasoning: '', answer: content };
+};
+
 function App() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -81,22 +93,39 @@ function App() {
           <h1 className="text-3xl font-bold text-center">Deepseek Chat</h1>
         </header>
         <div className="flex flex-col flex-1 overflow-y-auto p-6 space-y-4">
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              <div
-                className={`max-w-[70%] rounded-lg p-4 shadow-sm ${
+          {messages.map((message, index) => {
+            if (message.role === 'assistant' && message.content.includes('<think>')) {
+              const { reasoning, answer } = parseMessage(message.content);
+              return (
+                <div key={index} className="flex justify-start">
+                  <div className="max-w-[70%] rounded-lg p-4 shadow-sm bg-gray-200 text-gray-800">
+                    {reasoning && (
+                      <details className="mb-2 border rounded p-2 bg-gray-100">
+                        <summary className="cursor-pointer font-bold">Show reasoning</summary>
+                        <div className="mt-2 text-sm text-gray-700">
+                          {reasoning}
+                        </div>
+                      </details>
+                    )}
+                    <div className="border-t pt-2 prose prose-sm text-gray-900">
+                      {answer}
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                <div className={`max-w-[70%] rounded-lg p-4 shadow-sm ${
                   message.role === 'user'
                     ? 'bg-blue-500 text-white'
                     : 'bg-gray-200 text-gray-800'
-                }`}
-              >
-                {message.content}
+                }`}>
+                  {message.content}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
           {isLoading && (
             <div className="flex justify-start">
               <div className="bg-gray-200 text-gray-800 rounded-lg p-4 shadow-sm">
