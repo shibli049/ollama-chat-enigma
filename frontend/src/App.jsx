@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 
@@ -62,14 +63,13 @@ function App() {
   };
 
   return (
-    // Updated container wrapper for modern design
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-3xl bg-white shadow-lg rounded-lg overflow-hidden">
-        <header className="bg-blue-500 text-white p-4">
-          <h1 className="text-xl font-semibold">Deepseek Chat</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 p-4">
+      <div className="w-full max-w-3xl bg-white shadow-xl rounded-2xl overflow-hidden">
+        <header className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white p-6 shadow-md">
+          <h1 className="text-3xl font-bold text-center">Deepseek Chat</h1>
         </header>
-        <div className="flex flex-col h-[calc(100vh-8rem)]">
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <div className="flex flex-col h-[calc(100vh-14rem)]">
+          <div className="flex-1 overflow-y-auto p-6 space-y-4">
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -78,7 +78,7 @@ function App() {
                 }`}
               >
                 <div
-                  className={`max-w-[70%] rounded-lg p-4 ${
+                  className={`max-w-[70%] rounded-lg p-4 shadow-sm ${
                     message.role === 'user'
                       ? 'bg-blue-500 text-white'
                       : 'bg-gray-200 text-gray-800'
@@ -90,29 +90,29 @@ function App() {
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-gray-200 text-gray-800 rounded-lg p-4">
+                <div className="bg-gray-200 text-gray-800 rounded-lg p-4 shadow-sm">
                   Thinking...
                 </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
-          <form onSubmit={handleSubmit} className="p-4 bg-gray-50 border-t">
-            <div className="flex space-x-2">
+          <form onSubmit={handleSubmit} className="p-6 bg-gray-100 border-t">
+            <div className="flex space-x-3">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
                 placeholder="Type your message..."
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 disabled={isLoading}
-                className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 disabled:bg-blue-300"
+                className="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 disabled:bg-blue-300 transition-transform duration-200 hover:scale-105 flex items-center justify-center"
               >
-                <PaperAirplaneIcon className="h-5 w-5" />
+                <PaperAirplaneIcon className="h-6 w-6" />
               </button>
             </div>
           </form>
