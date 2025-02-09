@@ -33,10 +33,19 @@ function App() {
     setMessages(prev => [...prev, assistantMessage].sort((a, b) => a.timestamp - b.timestamp));
 
     try {
+      // Prepare chat history for the API
+      const chatHistory = messages.map(msg => ({
+        role: msg.role,
+        content: msg.content
+      }));
+
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: input }),
+        body: JSON.stringify({
+          prompt: input,
+          messages: [...chatHistory, { role: 'user', content: input }]
+        }),
       });
 
       const reader = response.body.getReader();
