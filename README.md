@@ -36,7 +36,7 @@ Please note: The current UI is not fully responsive and is provided as a proof-o
 - Java 21
 - Maven
 - Ollama (for local LLM support)
-- Deepseek-coder-1.3b-instruct model installed in Ollama
+- Deepseek-r1:1.5 model installed in Ollama
 
 ### Before Running
 1. Install Ollama from https://ollama.com/
