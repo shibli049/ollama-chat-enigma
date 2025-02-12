@@ -30,23 +30,27 @@ public class OllamaService {
             messages = request.getMessages();
         }
 
-        // Format conversation history
-        StringBuilder conversation = new StringBuilder();
-        conversation.append("System: You are a helpful AI assistant.\n\n");
-        
-        for (Message message : messages) {
-            conversation.append(message.getRole())
-                    .append(": ")
-                    .append(message.getContent())
-                    .append("\n\n");
-        }
+        messages.add(new Message("user", request.getPrompt()));
+//        request.setPrompt(null);
+
+
+//        // Format conversation history
+//        StringBuilder conversation = new StringBuilder();
+//        conversation.append("System: You are a helpful AI assistant.\n\n");
+//
+//        for (Message message : messages) {
+//            conversation.append(message.getRole())
+//                    .append(": ")
+//                    .append(message.getContent())
+//                    .append("\n\n");
+//        }
         
         // Add current prompt
-        conversation.append("user: ").append(request.getPrompt()).append("\n\n");
+//        conversation.append("user: ").append(request.getPrompt()).append("\n\n");
         
         // Update the request with formatted conversation
-        request.setPrompt(conversation.toString());
-        request.setMessages(new ArrayList<>()); // Clear individual messages
+//        request.setPrompt(conversation.toString());
+//        request.setMessages(new ArrayList<>()); // Clear individual messages
 
         return webClient.post()
                 .uri("/api/generate")
