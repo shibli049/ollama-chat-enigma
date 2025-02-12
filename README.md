@@ -1,15 +1,14 @@
-# DeepSeek Spring Chat App
+# Ollama Chat Enigma
 
-A modern chat application built with Spring Boot and React, featuring a clean and responsive UI with dark/light mode support.
+A modern chat application built with Spring Boot and React, featuring a clean UI with dark/light mode support.
 
 ## Features
 
 - 🌓 Dark/Light mode toggle
 - 💬 Real-time chat functionality
 - 🎨 Clean and modern UI using Tailwind CSS
-- ⚡ Responsive design
 - 📝 New chat creation
-- 🗂️ Chat history (Coming Soon)
+- 🗂️ Chat history (Maybe, Coming Soon)
 
 ## Tech Stack
 
@@ -27,6 +26,8 @@ A modern chat application built with Spring Boot and React, featuring a clean an
 ## Disclaimer
 
 This project is primarily generated using GitHub Copilot, with minimal manual code modifications. It serves as a demonstration of AI-assisted development capabilities. While the core functionality and structure were suggested by GitHub Copilot, some modifications and customizations were made by hand.
+
+Please note: The current UI is not fully responsive and is provided as a proof-of-concept.
 
 ## Getting Started
 
