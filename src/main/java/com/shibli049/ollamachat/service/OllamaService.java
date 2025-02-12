@@ -1,8 +1,8 @@
-package com.shibli.ollamachat.service;
+package com.shibli049.ollamachat.service;
 
-import com.shibli.ollamachat.model.ChatRequest;
-import com.shibli.ollamachat.model.ChatResponse;
-import com.shibli.ollamachat.model.Message;
+import com.shibli049.ollamachat.model.ChatRequest;
+import com.shibli049.ollamachat.model.ChatResponse;
+import com.shibli049.ollamachat.model.Message;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;

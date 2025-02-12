@@ -1,4 +1,4 @@
-package com.shibli.ollamachat.config;
+package com.shibli049.ollamachat.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

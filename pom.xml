@@ -9,7 +9,7 @@
         <version>3.4.2</version>
     </parent>
     
-    <groupId>com.shibli</groupId>
+    <groupId>com.shibli049</groupId>
     <artifactId>ollama-chat</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ollama-chat</name>

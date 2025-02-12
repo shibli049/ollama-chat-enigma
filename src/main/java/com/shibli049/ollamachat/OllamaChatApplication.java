@@ -1,4 +1,4 @@
-package com.shibli.ollamachat;
+package com.shibli049.ollamachat;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

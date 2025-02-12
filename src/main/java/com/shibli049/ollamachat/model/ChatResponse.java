@@ -1,4 +1,4 @@
-package com.shibli.ollamachat.model;
+package com.shibli049.ollamachat.model;
 
 import lombok.Data;
 

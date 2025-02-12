@@ -1,8 +1,8 @@
-package com.shibli.ollamachat.controller;
+package com.shibli049.ollamachat.controller;
 
-import com.shibli.ollamachat.model.ChatRequest;
-import com.shibli.ollamachat.model.ChatResponse;
-import com.shibli.ollamachat.service.OllamaService;
+import com.shibli049.ollamachat.model.ChatRequest;
+import com.shibli049.ollamachat.model.ChatResponse;
+import com.shibli049.ollamachat.service.OllamaService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
