@@ -61,7 +61,11 @@ function App() {
 
         for (const line of lines) {
           const data = JSON.parse(line);
-          assistantMessage.content += data.response;
+          if(!data && !data.message && !data.message.content) {
+            continue;
+          }
+
+          assistantMessage.content += data.message.content;
           setMessages(prev => {
             const updated = prev.map((msg, i) => i === prev.length - 1 ? assistantMessage : msg);
             localStorage.setItem('chatMessages', JSON.stringify(updated));
@@ -102,14 +106,14 @@ function App() {
           setIsDark={setIsDark}
         />
         <div className="flex-1 flex flex-col bg-white dark:bg-gray-900 shadow-xl">
-          <header className="bg-gradient-to-r from-indigo-600 to-blue-500 dark:from-gray-800 dark:to-gray-700 text-white p-6 shadow-md">
-            <div className="flex justify-center items-center">
-              <div className="text-center">
+        <header className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white p-6 shadow-md">
+          <div className="flex flex-col items-center">
+            <div className="relative">
                 <h1 className="text-3xl font-bold">Arcane Chat Enigma</h1>
-                <p className="text-xs mt-1">by <a href="https://github.com/shibli049" className="text-yellow-300 hover:underline">shibli049</a></p>
-              </div>
-            </div>
-          </header>
+                <p className="text-xs absolute -bottom-4 right-1">by <a href="https://github.com/shibli049" className="text-yellow-300 hover:underline">shibli049</a></p>
+                </div>
+          </div>
+        </header>
           <div className="flex flex-col flex-1 overflow-y-auto p-6 space-y-4">
             {messages.map((message, index) => (
               <ChatMessage key={index} message={message} />
