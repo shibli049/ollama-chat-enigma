@@ -34,6 +34,15 @@ This project is primarily generated using GitHub Copilot, with minimal manual co
 - Node.js (>= 16)
 - Java 21
 - Maven
+- Ollama (for local LLM support)
+- Deepseek-coder-1.3b-instruct model installed in Ollama
+
+### Before Running
+1. Install Ollama from https://ollama.com/
+2. Pull the Deepseek model:
+```bash
+ollama pull deepseek-r1:1.5b
+```
 
 ### Running the Application
 
