@@ -8,7 +8,8 @@ A modern chat application built with Spring Boot and React, featuring a clean UI
 - 💬 Real-time chat functionality
 - 🎨 Clean and modern UI using Tailwind CSS
 - 📝 New chat creation
-- 🗂️ Chat history (Maybe, Coming Soon)
+- 🗂️ Multiple Chat history (Maybe, Coming Soon)
+- 💾 Stores 100 messages per chat for context-aware responses
 
 ## Tech Stack
 
