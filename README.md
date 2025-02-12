@@ -49,7 +49,6 @@ ollama pull deepseek-r1:1.5b
 
 1. **Backend**
 ```bash
-cd backend
 mvn spring-boot:run
 ```
 
