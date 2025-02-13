@@ -16,7 +16,28 @@ export const ChatMessage = ({ message }) => {
               {reasoning && (
                 <details className="mb-2 border rounded p-2 bg-gray-100 dark:bg-gray-700 dark:border-gray-600">
                   <summary className="cursor-pointer font-bold">Show reasoning</summary>
-                  <div className="mt-2 text-sm text-gray-700 dark:text-gray-300">{reasoning}</div>
+                  <ReactMarkdown 
+                    className="mt-2 text-sm text-gray-700 dark:text-gray-300"
+                    components={{
+                      code({node, inline, className, children, ...props}) {
+                        const match = /language-(\w+)/.exec(className || '');
+                        return !inline && match ? (
+                          <SyntaxHighlighter
+                            style={vscDarkPlus}
+                            language={match[1]}
+                            PreTag="div"
+                            {...props}
+                          >
+                            {String(children).replace(/\n$/, '')}
+                          </SyntaxHighlighter>
+                        ) : (
+                          <code className={className} {...props}>{children}</code>
+                        );
+                      }
+                    }}
+                  >
+                    {reasoning}
+                  </ReactMarkdown>
                 </details>
               )}
               <ReactMarkdown 
