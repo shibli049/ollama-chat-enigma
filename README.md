@@ -45,6 +45,15 @@ Please note: The current UI is not fully responsive and is provided as a proof-o
 ```bash
 ollama pull deepseek-r1:1.5b
 ```
+3. Optionally, run the Docker Compose to start the Ollama container:
+```bash
+docker-compose up -d
+```
+4. If running Ollama inside Docker, install the model by executing:
+```bash
+docker exec -it ollama ollama pull deepseek-r1:1.5b
+```
+
 
 ### Running the Application
 
